@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ch2sdy4m3vrks"]
+
+[ext_resource type="Script" uid="uid://catdcag0o4ulj" path="res://movable_character.gd" id="1_nlvit"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nlgaf"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nlgaf"]
+
+[node name="MoveableCharacter" type="CharacterBody3D" unique_id=1193853361]
+script = ExtResource("1_nlvit")
+move_speed = 15.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=719663181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0544868, 0)
+shape = SubResource("CapsuleShape3D_nlgaf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1776827537]
+mesh = SubResource("CapsuleMesh_nlgaf")
