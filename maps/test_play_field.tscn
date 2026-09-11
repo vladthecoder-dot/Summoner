@@ -5,6 +5,16 @@
 [ext_resource type="Script" uid="uid://c63px5qodbom5" path="res://components/select_raycast.gd" id="3_y4d8a"]
 [ext_resource type="PackedScene" uid="uid://ch2sdy4m3vrks" path="res://moveable_character.tscn" id="4_yreh3"]
 [ext_resource type="Script" uid="uid://c2y7xas16uewn" path="res://maps/spawner.gd" id="5_xait0"]
+[ext_resource type="Script" uid="uid://ch8605et206i4" path="res://maps/spawn_data.gd" id="5_ypnlr"]
+[ext_resource type="PackedScene" uid="uid://caxkxfkc2f0ln" path="res://ui/gameplay_ui.tscn" id="6_fp4tg"]
+[ext_resource type="Script" uid="uid://catdcag0o4ulj" path="res://movable_character.gd" id="7_3a7ts"]
+[ext_resource type="Texture2D" uid="uid://cw7kuxhtrwbi7" path="res://icon.svg" id="8_aa3yn"]
+[ext_resource type="Script" uid="uid://b8n3dyrku3om1" path="res://actions/actions_component.gd" id="9_oc5gi"]
+[ext_resource type="Script" uid="uid://dn7fgf8mgkbqw" path="res://actions/base_action.gd" id="10_0p3sx"]
+[ext_resource type="Resource" uid="uid://dvslqlkhay34g" path="res://actions/resources/move_resource.tres" id="11_qlvg3"]
+[ext_resource type="Resource" uid="uid://dbdjgbvb1uiya" path="res://actions/resources/test_melee.tres" id="12_dr0v5"]
+[ext_resource type="Script" uid="uid://y6m3xkqswcas" path="res://components/health_component.gd" id="13_mx3xg"]
+[ext_resource type="PackedScene" uid="uid://bqb2kob1x01nv" path="res://ui/health_bar.tscn" id="14_148kh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lgdxs"]
 
@@ -16,6 +26,57 @@ background_mode = 2
 sky = SubResource("Sky_7na74")
 ambient_light_source = 3
 reflected_light_source = 2
+
+[sub_resource type="Resource" id="Resource_xait0"]
+script = ExtResource("5_ypnlr")
+scene = ExtResource("4_yreh3")
+spawn_tile_cell = Vector3i(-2, 0, 1)
+group = "player_unit"
+metadata/_custom_type_script = "uid://ch8605et206i4"
+
+[sub_resource type="Resource" id="Resource_uf7db"]
+script = ExtResource("5_ypnlr")
+scene = ExtResource("4_yreh3")
+spawn_tile_cell = Vector3i(1, 0, 1)
+group = "player_unit"
+metadata/_custom_type_script = "uid://ch8605et206i4"
+
+[sub_resource type="Resource" id="Resource_ci02v"]
+script = ExtResource("5_ypnlr")
+scene = ExtResource("4_yreh3")
+spawn_tile_cell = Vector3i(-2, 0, -2)
+group = "enemy_unit"
+metadata/_custom_type_script = "uid://ch8605et206i4"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nlgaf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_242p7"]
+albedo_texture = ExtResource("8_aa3yn")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nlgaf"]
+material = SubResource("StandardMaterial3D_242p7")
+
+[sub_resource type="PackedScene" id="PackedScene_3pnyx"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("MoveableCharacter", "CharacterBody3D", "script", "move_speed", "CollisionShape3D", "CollisionShape3D", "transform", "shape", "MeshInstance3D", "MeshInstance3D", "transform", "mesh", "ActionsComponent", "Node", "script", "available_actions", "context", "metadata/_custom_type_script", "HealthComponent", "Node", "script", "HealthBar", "health_component", "offset"),
+"node_count": 6,
+"node_ids": PackedInt32Array(1193853361, 719663181, 1776827537, 807235434, 1785725548, 572763576),
+"node_paths": [NodePath("."), NodePath("./CollisionShape3D"), NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 1073741824, 0, 5, 4, -1, 2, 6, 2, 7, 3, 0, 1073741825, 0, 9, 8, -1, 2, 10, 4, 11, 5, 0, 1073741826, 0, 13, 12, -1, 4, 14, 6, 15, 7, 16, 8, 17, 9, 0, 1073741827, 0, 19, 18, -1, 1, 20, 10, 0, 1073741828, 0, 2147483647, 21, 11, 2, 1073741846, 12, 23, 13, 0),
+"variants": [ExtResource("7_3a7ts"), 15.0, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0544868, 0), SubResource("CapsuleShape3D_nlgaf"), Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0), SubResource("CapsuleMesh_nlgaf"), ExtResource("9_oc5gi"), Array[ExtResource("10_0p3sx")]([ExtResource("11_qlvg3"), ExtResource("12_dr0v5")]), null, "uid://b8n3dyrku3om1", ExtResource("13_mx3xg"), ExtResource("14_148kh"), NodePath("../HealthComponent"), Vector3(0, 2.5, 0)],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_xau66"]
+script = ExtResource("5_ypnlr")
+scene = SubResource("PackedScene_3pnyx")
+spawn_tile_cell = Vector3i(1, 0, -2)
+group = "enemy_unit"
+metadata/_custom_type_script = "uid://ch8605et206i4"
 
 [node name="Node3D" type="Node3D" unique_id=1289600139]
 
@@ -33,19 +94,13 @@ data = {
 script = ExtResource("2_y4d8a")
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="RaycastSelect" type="Node" parent="." unique_id=624194739 node_paths=PackedStringArray("camera", "pathfinder")]
+[node name="RaycastSelect" type="Node" parent="." unique_id=624194739 node_paths=PackedStringArray("camera")]
 script = ExtResource("3_y4d8a")
 camera = NodePath("../PlayerCamera")
-pathfinder = NodePath("../GridMap")
 
 [node name="Spawner" type="Node" parent="." unique_id=172412465 node_paths=PackedStringArray("grid")]
 script = ExtResource("5_xait0")
-scene = ExtResource("4_yreh3")
 grid = NodePath("../GridMap")
-spawn_tile_cell = Vector3i(-2, 0, -2)
+spawn_list = Array[ExtResource("5_ypnlr")]([SubResource("Resource_xait0"), SubResource("Resource_uf7db"), SubResource("Resource_ci02v"), SubResource("Resource_xau66")])
 
-[node name="Spawner2" type="Node" parent="." unique_id=2062142226 node_paths=PackedStringArray("grid")]
-script = ExtResource("5_xait0")
-scene = ExtResource("4_yreh3")
-grid = NodePath("../GridMap")
-spawn_tile_cell = Vector3i(1, 0, -2)
+[node name="GameplayUI" parent="." unique_id=1963841810 instance=ExtResource("6_fp4tg")]

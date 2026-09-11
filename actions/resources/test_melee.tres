@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MeleeHit" format=3 uid="uid://dbdjgbvb1uiya"]
+
+[ext_resource type="Script" uid="uid://d2wub24or0uqa" path="res://actions/melee_hit.gd" id="1_2wnl6"]
+
+[resource]
+script = ExtResource("1_2wnl6")
+name = "Melee"
+metadata/_custom_type_script = "uid://d2wub24or0uqa"

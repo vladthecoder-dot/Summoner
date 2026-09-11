@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://caxkxfkc2f0ln"]
+
+[ext_resource type="Script" uid="uid://dgeep07031jiw" path="res://ui/gameplay_ui.gd" id="1_hlshe"]
+
+[node name="GameplayUI" type="Control" unique_id=1963841810]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hlshe")
+
+[node name="OptionsContainer" type="VBoxContainer" parent="." unique_id=1372160916]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2

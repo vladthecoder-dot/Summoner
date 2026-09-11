@@ -1,10 +1,21 @@
 [gd_scene format=3 uid="uid://ch2sdy4m3vrks"]
 
 [ext_resource type="Script" uid="uid://catdcag0o4ulj" path="res://movable_character.gd" id="1_nlvit"]
+[ext_resource type="Script" uid="uid://b8n3dyrku3om1" path="res://actions/actions_component.gd" id="2_4otaf"]
+[ext_resource type="Texture2D" uid="uid://cw7kuxhtrwbi7" path="res://icon.svg" id="2_hp4ym"]
+[ext_resource type="Script" uid="uid://dn7fgf8mgkbqw" path="res://actions/base_action.gd" id="3_242p7"]
+[ext_resource type="Resource" uid="uid://dvslqlkhay34g" path="res://actions/resources/move_resource.tres" id="4_hp4ym"]
+[ext_resource type="Resource" uid="uid://dbdjgbvb1uiya" path="res://actions/resources/test_melee.tres" id="6_71pmm"]
+[ext_resource type="Script" uid="uid://y6m3xkqswcas" path="res://components/health_component.gd" id="7_5br0b"]
+[ext_resource type="PackedScene" uid="uid://bqb2kob1x01nv" path="res://ui/health_bar.tscn" id="8_exn1m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nlgaf"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_242p7"]
+albedo_texture = ExtResource("2_hp4ym")
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nlgaf"]
+material = SubResource("StandardMaterial3D_242p7")
 
 [node name="MoveableCharacter" type="CharacterBody3D" unique_id=1193853361]
 script = ExtResource("1_nlvit")
@@ -15,4 +26,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0544868, 0)
 shape = SubResource("CapsuleShape3D_nlgaf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1776827537]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_nlgaf")
+
+[node name="ActionsComponent" type="Node" parent="." unique_id=807235434]
+script = ExtResource("2_4otaf")
+available_actions = Array[ExtResource("3_242p7")]([ExtResource("4_hp4ym"), ExtResource("6_71pmm")])
+context = null
+metadata/_custom_type_script = "uid://b8n3dyrku3om1"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1785725548]
+script = ExtResource("7_5br0b")
+
+[node name="HealthBar" parent="." unique_id=572763576 node_paths=PackedStringArray("health_component") instance=ExtResource("8_exn1m")]
+health_component = NodePath("../HealthComponent")
+offset = Vector3(0, 2.5, 0)

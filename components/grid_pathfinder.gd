@@ -1,11 +1,14 @@
-extends GridMap
 class_name GridPathfinder
+extends GridMap
+
+static var instance: GridPathfinder
 
 var astar: AStar3D = AStar3D.new()
 var cell_ids: Dictionary[Vector3i, int]
 
 func _ready() -> void:
 	setup_grid_pathfinding()
+	instance = self
 
 func setup_grid_pathfinding() -> void:
 	# Initializing cells BEFORE connecting them with neighbors
