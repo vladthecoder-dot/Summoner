@@ -1,6 +1,8 @@
 class_name GridCharacter
 extends CharacterBody3D
 
+@export var components: Array[Node]
+
 var current_path: Array[Vector3] = []
 var current_cell: Vector3i:
 	set(value):
@@ -8,7 +10,9 @@ var current_cell: Vector3i:
 		pathfinder.set_tile_blocked(current_cell, false)
 		current_cell = value
 		pathfinder.set_tile_blocked(current_cell, true)
-var pathfinder: GridPathfinder
+
+var pathfinder: GridPathfinder:
+	get: return GridPathfinder.instance
 
 @export var move_speed: float = 5
 @export var rotation_speed: float = 12
@@ -16,13 +20,20 @@ var pathfinder: GridPathfinder
 var facing_direction: Vector3
 
 var is_selected: bool = false
-var outline_resource: StandardMaterial3D = preload("uid://3tfjw6y8ivgd")
+var is_active: bool = false
+const SELECTED_SHADER = preload("uid://3tfjw6y8ivgd")
+const ACTIVE_SHADER = preload("uid://7hikqvsuhdhv")
 
-func setup_position(cell: Vector3i, map: GridPathfinder) -> void:
-	pathfinder = map
+func get_component(target_type: Script) -> Variant:
+	for comp in components:
+		if is_instance_of(comp, target_type):
+			return comp
+	
+	return null
+
+func setup_position(cell: Vector3i) -> void:
 	current_cell = cell
-	global_position = map.map_to_local(cell)
-	print("cell:%v global position to map:%v" % [current_cell, map.local_to_map(global_position)])
+	global_position = pathfinder.map_to_local(cell)
 
 func start_movement(target_position: Vector3) -> bool:
 	if not current_path.is_empty(): return false
@@ -62,15 +73,20 @@ func look_at_target(target_world: Vector3) -> void:
 
 func set_selected(selected: bool) -> void:
 	is_selected = selected
-	apply_outline(self, selected)
+	if not is_active:
+		apply_outline(self, selected, SELECTED_SHADER)
 
-func apply_outline(node: Node, enable: bool) -> void:
+func set_active(active: bool) -> void:
+	is_active = active
+	apply_outline(self, active, ACTIVE_SHADER)
+
+func apply_outline(node: Node, enable: bool, shader: StandardMaterial3D) -> void:
 	for child in node.get_children():
-		apply_outline(child, enable)
+		apply_outline(child, enable, shader)
 	
 	if node is not MeshInstance3D: return
 	
 	if enable:
-		node.material_overlay = outline_resource
+		node.material_overlay = shader
 	else:
 		node.material_overlay = null

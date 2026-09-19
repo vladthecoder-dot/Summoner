@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PassTurn" format=3 uid="uid://bavxe2cd32u2c"]
+
+[ext_resource type="Script" uid="uid://042asj4dxnk2" path="res://actions/pass_turn.gd" id="1_wylkx"]
+
+[resource]
+script = ExtResource("1_wylkx")
+name = "End turn"
+metadata/_custom_type_script = "uid://042asj4dxnk2"

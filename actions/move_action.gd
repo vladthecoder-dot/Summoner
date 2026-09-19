@@ -14,8 +14,8 @@ func move(position_world: Vector3) -> void:
 	var result = character.start_movement(position_world)
 	if result == true:
 		deactivate()
+		EventBus.action_executed.emit(self)
 
 func deactivate() -> void:
 	EventBus.action_canceled.disconnect(deactivate)
 	EventBus.player_click.disconnect(move)
-	EventBus.action_executed.emit()

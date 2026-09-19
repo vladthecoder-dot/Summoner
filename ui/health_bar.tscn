@@ -1,19 +1,16 @@
 [gd_scene format=3 uid="uid://bqb2kob1x01nv"]
 
+[ext_resource type="StyleBox" uid="uid://b0v1wqcluu4wp" path="res://ui/player_unit_hp.tres" id="1_prk0l"]
 [ext_resource type="Script" uid="uid://c6oaytdf6qgng" path="res://ui/health_bar.gd" id="1_rwxrv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwxrv"]
 bg_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
 skew = Vector2(0.4, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mh8q4"]
-bg_color = Color(0, 0.62475675, 9.62615e-07, 1)
-skew = Vector2(0.4, 0)
-
 [node name="HealthBar" type="ProgressBar" unique_id=572763576]
 offset_right = 35.0
 offset_bottom = 7.0
 theme_override_styles/background = SubResource("StyleBoxFlat_rwxrv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_mh8q4")
+theme_override_styles/fill = ExtResource("1_prk0l")
 show_percentage = false
 script = ExtResource("1_rwxrv")

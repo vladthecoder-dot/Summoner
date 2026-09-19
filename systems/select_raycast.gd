@@ -43,18 +43,18 @@ func mouse_select() -> void:
 				EventBus.cell_targeted.emit()
 
 func selector(target_body: Node3D) -> void:
+	if target_body is not GridCharacter: return
+	
 	if controllable_character != null:
 		deselect_current()
-		if target_body.is_in_group("player_unit"):
-			select_controllable(target_body)
+		select_controllable(target_body)
 	else:
 		select_controllable(target_body)
 
-func select_controllable(body: Node3D) -> void:
-	if body.is_in_group("player_unit"):
-		controllable_character = body
-		controllable_character.set_selected(true)
-		EventBus.character_selected.emit(controllable_character)
+func select_controllable(body: GridCharacter) -> void:
+	controllable_character = body
+	controllable_character.set_selected(true)
+	EventBus.character_selected.emit(controllable_character)
 
 func deselect_current() -> void:
 	if controllable_character == null: return

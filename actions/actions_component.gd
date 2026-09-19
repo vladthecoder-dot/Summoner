@@ -1,22 +1,17 @@
 class_name ActionsComponent
 extends Node
 
+@export var owning_character: GridCharacter
+
 @export var available_actions: Array[BaseAction]
 @export var context: Dictionary
 
 var current_action: BaseAction
 
 func _ready() -> void:
-	var parent = get_parent()
-	if parent is not GridCharacter: 
-		return
+	context["character"] = owning_character
 	
-	context["character"] = get_parent() as GridCharacter
-	EventBus.character_selected.connect(func(character): 
-		if character == parent:
-			EventBus.actions_component_selected.emit(self))
-	
-	EventBus.action_executed.connect(func(): current_action = null)
+	EventBus.action_executed.connect(func(_action): current_action = null)
 
 func execute_action(action_name: String) -> void:
 	var results = available_actions.filter(func(res): return res and res.name == action_name)

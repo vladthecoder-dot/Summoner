@@ -4,10 +4,16 @@ extends Control
 var selected_character: GridCharacter
 
 func _ready() -> void:
-	EventBus.actions_component_selected.connect(show_actions)
-	EventBus.character_deselected.connect(hide_actions)
+	await get_tree().process_frame
+	TurnManager.instance.turn_started.connect(show_actions)
+	TurnManager.instance.turn_ended.connect(hide_actions)
 
-func show_actions(action_component: ActionsComponent) -> void:
+func show_actions(character: GridCharacter) -> void:
+	if not character.is_in_group("player_unit"): return
+	
+	var action_component = character.get_component(ActionsComponent)
+	if action_component == null: return
+	
 	for action in action_component.available_actions:
 		var button = Button.new()
 		var exec = action_component.execute_action.bind(action.name)

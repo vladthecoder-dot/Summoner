@@ -1,7 +1,7 @@
 class_name HealthComponent
 extends Node
 
-var owning_character: GridCharacter
+@export var owning_character: GridCharacter
 var alive: bool = true
 @export_range(1, 99, 1, "or_greater") var max_health: int = 10
 var current_health: int:
@@ -19,9 +19,6 @@ signal current_health_changed()
 
 func _ready() -> void:
 	current_health = max_health
-	owning_character = get_parent()
-	if owning_character is not GridCharacter:
-		return
 	
 	EventBus.trying_to_damage_character.connect(func(character, amount):
 		if character == owning_character:

@@ -9,6 +9,8 @@ var target_character: GridCharacter:
 @export_category("Visual")
 @export var offset: Vector3 = Vector3(0, 2.2, 0)
 @export var health_time: float = 0.2
+const PLAYER_UNIT_HP = preload("uid://b0v1wqcluu4wp")
+const ENEMY_UNIT_HP = preload("uid://bjqcymtgdcx7p")
 
 func _ready() -> void:
 	hide()
@@ -20,6 +22,11 @@ func setup() -> void:
 	
 	max_value = health_component.max_health
 	value = health_component.current_health
+	
+	if target_character.is_in_group("player_unit"):
+		add_theme_stylebox_override("fill", PLAYER_UNIT_HP)
+	elif target_character.is_in_group("enemy_unit"):
+		add_theme_stylebox_override("fill", ENEMY_UNIT_HP)
 	
 	show()
 
