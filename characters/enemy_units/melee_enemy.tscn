@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c25rtjdlle8ce"]
+
+[ext_resource type="PackedScene" uid="uid://ch2sdy4m3vrks" path="res://characters/movable_character.tscn" id="1_kohs0"]
+[ext_resource type="Script" uid="uid://q70uukkir03" path="res://characters/enemy_ai/simple_melee_enemy.gd" id="2_wymrt"]
+
+[node name="MeleeEnemy" unique_id=1193853361 groups=["enemy_unit"] instance=ExtResource("1_kohs0")]
+
+[node name="SimpleMelee" type="Node" parent="." index="3" unique_id=418313861 node_paths=PackedStringArray("owning_character")]
+script = ExtResource("2_wymrt")
+owning_character = NodePath("..")
+metadata/_custom_type_script = "uid://q70uukkir03"

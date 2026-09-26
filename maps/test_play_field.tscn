@@ -3,10 +3,11 @@
 [ext_resource type="MeshLibrary" uid="uid://b24clxqfmk26j" path="res://maps/mesh_collection.tres" id="1_afjol"]
 [ext_resource type="Script" uid="uid://eu6ce8gbxdx" path="res://components/grid_pathfinder.gd" id="2_y4d8a"]
 [ext_resource type="Script" uid="uid://c63px5qodbom5" path="res://systems/select_raycast.gd" id="3_y4d8a"]
-[ext_resource type="PackedScene" uid="uid://ch2sdy4m3vrks" path="res://characters/moveable_character.tscn" id="4_yreh3"]
 [ext_resource type="Script" uid="uid://c2y7xas16uewn" path="res://systems/spawner.gd" id="5_xait0"]
 [ext_resource type="Script" uid="uid://ch8605et206i4" path="res://maps/spawn_data.gd" id="5_ypnlr"]
 [ext_resource type="PackedScene" uid="uid://caxkxfkc2f0ln" path="res://ui/gameplay_ui.tscn" id="6_fp4tg"]
+[ext_resource type="PackedScene" uid="uid://bgk1clv4diufg" path="res://characters/player_units/melee_ally.tscn" id="7_26how"]
+[ext_resource type="PackedScene" uid="uid://c25rtjdlle8ce" path="res://characters/enemy_units/melee_enemy.tscn" id="8_5750e"]
 [ext_resource type="Script" uid="uid://dy7348iwabrei" path="res://systems/turn_manager.gd" id="16_aa3yn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lgdxs"]
@@ -22,25 +23,25 @@ reflected_light_source = 2
 
 [sub_resource type="Resource" id="Resource_xait0"]
 script = ExtResource("5_ypnlr")
-scene = ExtResource("4_yreh3")
+scene = ExtResource("7_26how")
 spawn_tile_cell = Vector3i(-2, 0, 1)
 metadata/_custom_type_script = "uid://ch8605et206i4"
 
 [sub_resource type="Resource" id="Resource_uf7db"]
 script = ExtResource("5_ypnlr")
-scene = ExtResource("4_yreh3")
+scene = ExtResource("7_26how")
 spawn_tile_cell = Vector3i(1, 0, 1)
 metadata/_custom_type_script = "uid://ch8605et206i4"
 
 [sub_resource type="Resource" id="Resource_ci02v"]
 script = ExtResource("5_ypnlr")
-scene = ExtResource("4_yreh3")
+scene = ExtResource("8_5750e")
 spawn_tile_cell = Vector3i(-2, 0, -2)
 metadata/_custom_type_script = "uid://ch8605et206i4"
 
 [sub_resource type="Resource" id="Resource_26how"]
 script = ExtResource("5_ypnlr")
-scene = ExtResource("4_yreh3")
+scene = ExtResource("8_5750e")
 spawn_tile_cell = Vector3i(1, 0, -2)
 metadata/_custom_type_script = "uid://ch8605et206i4"
 

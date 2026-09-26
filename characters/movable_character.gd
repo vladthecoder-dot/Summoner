@@ -24,6 +24,8 @@ var is_active: bool = false
 const SELECTED_SHADER = preload("uid://3tfjw6y8ivgd")
 const ACTIVE_SHADER = preload("uid://7hikqvsuhdhv")
 
+signal movement_stopped
+
 func get_component(target_type: Script) -> Variant:
 	for comp in components:
 		if is_instance_of(comp, target_type):
@@ -35,11 +37,13 @@ func setup_position(cell: Vector3i) -> void:
 	current_cell = cell
 	global_position = pathfinder.map_to_local(cell)
 
-func start_movement(target_position: Vector3) -> bool:
-	if not current_path.is_empty(): return false
-	var packed_path = pathfinder.get_path_to_world_pos(global_position, target_position)
-	current_path.append_array(packed_path)
-	return true if packed_path.size() > 0 else false
+func start_movement(target_cell: Vector3i) -> bool:
+	if not current_path.is_empty():
+		return false
+	
+	var path = pathfinder.get_grid_path(current_cell, target_cell)
+	current_path.append_array(path)
+	return true if path.size() > 0 else false
 
 func _physics_process(delta: float) -> void:
 	if current_path.is_empty(): return
@@ -56,6 +60,8 @@ func _physics_process(delta: float) -> void:
 	if global_position.distance_to(target_pos) < 0.005:
 		current_cell = pathfinder.local_to_map(current_path[0])
 		current_path.remove_at(0)
+		if current_path.is_empty():
+			movement_stopped.emit()
 
 func rotate_towards(direction: Vector3, delta: float) -> void:
 	var target_basis = Transform3D.IDENTITY.looking_at(direction, Vector3.UP).basis

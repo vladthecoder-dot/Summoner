@@ -28,6 +28,8 @@ func setup() -> void:
 	elif target_character.is_in_group("enemy_unit"):
 		add_theme_stylebox_override("fill", ENEMY_UNIT_HP)
 	
+	$UnitNameLabel.text = target_character.name
+	
 	show()
 
 func _process(_delta: float) -> void:

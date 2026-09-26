@@ -19,10 +19,9 @@ albedo_texture = ExtResource("2_hp4ym")
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nlgaf"]
 material = SubResource("StandardMaterial3D_242p7")
 
-[node name="MoveableCharacter" type="CharacterBody3D" unique_id=1193853361 node_paths=PackedStringArray("components") groups=["player_unit"]]
+[node name="MovableCharacter" type="CharacterBody3D" unique_id=1193853361 node_paths=PackedStringArray("components")]
 script = ExtResource("1_nlvit")
 components = [NodePath("Components/ActionsComponent"), NodePath("Components/HealthComponent"), NodePath("Components/StatsComponents")]
-move_speed = 15.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=719663181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0544868, 0)

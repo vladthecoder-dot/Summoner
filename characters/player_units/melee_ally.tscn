@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bgk1clv4diufg"]
+
+[ext_resource type="PackedScene" uid="uid://ch2sdy4m3vrks" path="res://characters/movable_character.tscn" id="1_qpapr"]
+
+[node name="AllyCharacter" unique_id=1193853361 groups=["player_unit"] instance=ExtResource("1_qpapr")]

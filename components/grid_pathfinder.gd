@@ -11,7 +11,6 @@ func _ready() -> void:
 	instance = self
 
 func setup_grid_pathfinding() -> void:
-	# Initializing cells BEFORE connecting them with neighbors
 	var grid_cells = get_used_cells()
 	for cell in grid_cells:
 		var point_id = astar.get_available_point_id()
@@ -19,12 +18,9 @@ func setup_grid_pathfinding() -> void:
 		astar.add_point(point_id, cell_position)
 		cell_ids[cell] = point_id
 	
-	var directions = [Vector3i.FORWARD, Vector3i.BACK, 
-			Vector3i.RIGHT, Vector3i.LEFT]
-	
 	for cell in grid_cells:
 		var current_id = cell_ids[cell]
-		for dir in directions:
+		for dir in GridCalculations.ORTHOGONAL_DIRECTIONS:
 			var neighbor_cell = cell + dir
 			if not cell_ids.has(neighbor_cell):
 				continue
@@ -35,10 +31,7 @@ func setup_grid_pathfinding() -> void:
 			
 			astar.connect_points(current_id, neighbor_id)
 
-func get_path_to_world_pos(start_world: Vector3, end_world: Vector3) -> PackedVector3Array:
-	var start_cell = local_to_map(start_world)
-	var end_cell = local_to_map(end_world)
-	print("pathfinding: from %v to %v" % [start_cell, end_cell])
+func get_grid_path(start_cell: Vector3i, end_cell: Vector3i) -> PackedVector3Array:
 	if not cell_ids.has(start_cell) or not cell_ids.has(end_cell):
 		return []
 	
@@ -54,7 +47,23 @@ func get_path_to_world_pos(start_world: Vector3, end_world: Vector3) -> PackedVe
 	
 	return path
 
+func get_path_to_world_pos(start_world: Vector3, end_world: Vector3) -> PackedVector3Array:
+	var start_cell = local_to_map(start_world)
+	var end_cell = local_to_map(end_world)
+	
+	var path = get_grid_path(start_cell, end_cell)
+	
+	return path
+
 func set_tile_blocked(cell: Vector3i, blocked: bool):
 	if not cell_ids.has(cell): return
 	var point_id = cell_ids[cell]
 	astar.set_point_disabled(point_id, blocked)
+
+func is_tile_walkable(cell: Vector3i) -> bool:
+	if not cell_ids.has(cell):
+		return false
+	
+	var cell_id = cell_ids[cell]
+	var is_walkable = not astar.is_point_disabled(cell_id)
+	return is_walkable

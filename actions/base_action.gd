@@ -6,5 +6,7 @@ extends Resource
 @export var description: String = "ACTION_DESCRIPTION"
 @export var cost: int = 0
 
-@abstract func activate(context: Dictionary)
-@abstract func deactivate()
+func can_be_activated() -> bool:
+	return true
+@abstract func activate(context: Dictionary) -> void
+@abstract func deactivate() -> void
